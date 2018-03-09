@@ -17,7 +17,7 @@ cat myfile.txt | ./netsend -s mycomputer:5000
 
 Serve file over http (for curl)
 ```
-cat cat myfile.txt | ./netsend -w 5000
+cat myfile.txt | ./netsend -w 5000
 ```
 
 ## ns.sh
@@ -36,7 +36,7 @@ cat myfile.txt | ./ns.sh put
 
 Serve file over http
 ```
-cat cat myfile.txt | ./ns.sh web
+cat myfile.txt | ./ns.sh web
 ```
 Get file from web
 ```
