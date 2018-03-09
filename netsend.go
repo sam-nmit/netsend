@@ -18,8 +18,8 @@ var (
 	send   = flag.String("s", "", "send [-s 127.0.0.1:6000]")
 )
 
-func listenerToPort(l *net.Listener) int {
-	return (*l).Addr().(*net.TCPAddr).Port
+func listenerToPort(l net.Listener) int {
+	return l.Addr().(*net.TCPAddr).Port
 }
 
 func serveWeb(port int) {
@@ -29,7 +29,7 @@ func serveWeb(port int) {
 		fmt.Fprint(w, sPipe)
 	})
 	l, _ := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", port))
-	fmt.Println(listenerToPort(&l))
+	fmt.Println(listenerToPort(l))
 	log.Fatal(http.Serve(l, nil))
 
 }
