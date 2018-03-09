@@ -35,7 +35,6 @@ func serveWeb(port int) {
 }
 
 func sendTCP(addr string) {
-
 	c, err := net.Dial("tcp", addr)
 	if err != nil {
 		log.Fatal("Failed to connect.")
@@ -48,19 +47,23 @@ func sendTCP(addr string) {
 
 func receveTCP(port int) {
 	l, _ := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", port))
-	c, _ := l.Accept()
-	b, _ := ioutil.ReadAll(c)
-	fmt.Print(string(b))
+	c, err := l.Accept()
+
+	if err != nil {
+		defer c.Close()
+		b, _ := ioutil.ReadAll(c)
+		fmt.Print(string(b))
+	}
 }
 
 func main() {
 
 	flag.Parse()
-	if *listen != 0 { //TCP Receving
+	if *listen != 0 {
 		receveTCP(*listen)
-	} else if *web != 0 { //WEB Receving
+	} else if *web != 0 {
 		serveWeb(*web)
-	} else if *send != "" { //Sending
+	} else if *send != "" {
 		lAddr := *send
 		if !strings.Contains(lAddr, ":") {
 			lAddr = fmt.Sprintf("127.0.0.1:%s", lAddr)

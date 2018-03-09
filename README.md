@@ -1,6 +1,6 @@
 # netsend
 cli network sharing
-(no error checking in the golang app, sorry)
+
 ## netshare
 Core application
 ### Usage
